@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -18,8 +19,10 @@ class SchedulesTable
                 TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
+                BooleanColumn::make('is_wfa')
+                    ->label('WFA'),
                 TextColumn::make('shift.name')
-                    ->numeric()
+                    ->description(fn (mixed $record): string => $record->shift->start_time . ' - ' . $record->shift->end_time)
                     ->sortable(),
                 TextColumn::make('office.name')
                     ->numeric()
