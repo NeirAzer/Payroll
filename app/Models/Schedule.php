@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Schedule extends Model
 {
     protected $guarded = ['id'];
+
+    protected $with = ['user', 'shift', 'office'];
 
     public function user()
     {
@@ -18,7 +21,7 @@ class Schedule extends Model
         return $this->belongsTo(Shift::class);
     }
 
-    public function office()
+    public function office(): BelongsTo
     {
         return $this->belongsTo(Office::class);
     }
