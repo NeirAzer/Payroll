@@ -41,6 +41,10 @@ class ScheduleForm
                                     ->label('WFA')
                                     ->onIcon(Heroicon::Check)
                                     ->offIcon(Heroicon::XMark),
+                                Toggle::make('is_banned')
+                                    ->label('Ban')
+                                    ->onIcon(Heroicon::Check)
+                                    ->offIcon(Heroicon::XMark),
                             ]) 
                     ]),
             ]);

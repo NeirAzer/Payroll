@@ -26,14 +26,14 @@ class ListAttendances extends ListRecords
         ];
     }
 
-    protected function getTableQuery(): ?Builder
+    protected function getTableQuery(): Builder|Relation|null
     {
         $query = parent::getTableQuery();
 
-        if (Auth::user()?->hasRole('super_admin')) {
+        if (Auth::user()->hasRole('super_admin')) {
             return $query;
+        } else {
+            return $query->where('user_id', Auth::id());
         }
-
-        return $query->where('user_id', Auth::id());
     }
 }

@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class SchedulesTable
@@ -27,6 +28,8 @@ class SchedulesTable
                 TextColumn::make('office.name')
                     ->numeric()
                     ->sortable(),
+                BooleanColumn::make('is_banned')
+                    ->label('Ban'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
