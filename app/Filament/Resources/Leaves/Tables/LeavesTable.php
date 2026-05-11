@@ -1,40 +1,38 @@
 <?php
 
-namespace App\Filament\Resources\Schedules\Tables;
+namespace App\Filament\Resources\Leaves\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
-class SchedulesTable
+class LeavesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
+                TextColumn::make('user_id')
                     ->numeric()
                     ->sortable(),
-                BooleanColumn::make('is_wfa')
-                    ->label('WFA'),
-                TextColumn::make('shift.name')
-                    ->description(fn (mixed $record): string => $record->shift->start_time . ' - ' . $record->shift->end_time)
+                TextColumn::make('start_date')
+                    ->date()
                     ->sortable(),
-                TextColumn::make('office.name')
-                    ->numeric()
+                TextColumn::make('end_date')
+                    ->date()
                     ->sortable(),
-                ToggleColumn::make('is_banned')
-                    ->label('Ban')
-                    ->hidden(fn () => !Auth::user()->hasRole('super_admin'))
-                    ->onIcon(Heroicon::Check)
-                    ->offIcon(Heroicon::XMark),
+                TextColumn::make('status')
+                    ->searchable()
+                    ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                    }),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
