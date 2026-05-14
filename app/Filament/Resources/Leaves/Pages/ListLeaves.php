@@ -21,7 +21,7 @@ class ListLeaves extends ListRecords
         ];
     }
 
-    protected function getTableQuery(): Builder
+    protected function getTableQuery(): ?Builder
     {
         $query = parent::getTableQuery();
 
@@ -29,6 +29,6 @@ class ListLeaves extends ListRecords
             return $query;
         }
 
-        return parent::getTableQuery();
+        return $query->where('user_id', Auth::id());
     }
 }

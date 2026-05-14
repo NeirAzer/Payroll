@@ -16,7 +16,6 @@ class CreateLeave extends CreateRecord
         if (empty($data['status'])) {
             $data['status'] = 'pending';
         }
-
         if (empty($data['user_id'])) {
             $data['user_id'] = Auth::id();
         }

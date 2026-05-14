@@ -11,8 +11,8 @@ class LeaveInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('user_id')
-                    ->numeric(),
+                TextEntry::make('user.name')
+                    ->label('User'),
                 TextEntry::make('start_date')
                     ->date(),
                 TextEntry::make('end_date')

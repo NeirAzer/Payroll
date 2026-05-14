@@ -15,9 +15,8 @@ class LeavesTable
     {
         return $table
             ->columns([
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('user.name')
+                    ->searchable(),
                 TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
@@ -26,7 +25,6 @@ class LeavesTable
                     ->sortable(),
                 TextColumn::make('status')
                     ->searchable()
-                    ->sortable()
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'pending' => 'warning',

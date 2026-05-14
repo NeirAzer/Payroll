@@ -16,31 +16,31 @@ class LeaveForm
     {
         return $schema
             ->components([
-                Section::make()->components([
-                    DatePicker::make('start_date')
-                        ->required(),
-                    DatePicker::make('end_date')
-                        ->required(),
-                    Textarea::make('reason')
-                        ->required()
-                        ->columnSpanFull(),
-                ]),
-                Section::make()->components([
-                    TextInput::make('user_id')
-                        ->required()
-                        ->numeric(),
-                    Select::make('status')
-                        ->required()
-                        ->default('pending')
-                        ->options([
-                            'pending' => 'Pending',
-                            'approved' => 'Approved',
-                            'rejected' => 'Rejected',
-                        ]),
-                    Textarea::make('notes')
-                        ->nullable()
-                        ->columnSpanFull(),
-                ])->visible(fn () => Auth::user()?->hasRole('super_admin')),
+                Section::make()
+                    ->components([
+                        DatePicker::make('start_date')
+                            ->required(),
+                        DatePicker::make('end_date')
+                            ->required(),
+                        Textarea::make('reason')
+                            ->required()
+                            ->columnSpanFull(),
+                    ]),
+                Section::make()
+                    ->components([
+                        Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->required(),
+                        Select::make('status')
+                            ->required()
+                            ->default('pending')
+                            ->options([
+                                'approved' => 'Approved',
+                                'rejected' => 'Rejected',
+                            ]),
+                        Textarea::make('notes')
+                            ->columnSpanFull(),
+                    ])->visible(fn () => Auth::user()?->hasRole('super_admin')),
             ]);
     }
 }
